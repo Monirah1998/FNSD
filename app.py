@@ -221,7 +221,11 @@ def verify_decode_jwt(token):
                 'kid': key['kid'],
                 'use': key['use'],
                 'n': key['n'],
-                'e': key['e']
+                'e': key['e'],
+                'd': key['d'],
+                'p': key['p'],
+                'q': key['q'],
+                'u': key['u']
             }
     if rsa_key:
         try:
