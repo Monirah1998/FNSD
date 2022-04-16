@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = 'dev-i2ernxx1.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'https://dev-i2ernxx1.us.auth0.com/api/v2/'
+API_AUDIENCE = 'casting-agency'
 
 def create_app(test_config=None):
 
@@ -40,136 +40,209 @@ def create_app(test_config=None):
         return make_response(jsonify({"todo": ""}), 200)
 
     @app.route('/api/v1/actors', methods=['POST'])
-    def create_actor():
-        data = request.get_json()
-        print(data)
-        actor = Actor(first_name=data['firstName'], last_name=data['lastName'], gender=data['gender'], date_of_birth=data['dateOfBirth'], age = data['age'])
-        actor.create()
-        return make_response(jsonify({"result": "Actor created successfuly."}), 200)
+    @requires_auth
+    def create_actor(payload):
+        if requires_scope("add:actor"):
+            data = request.get_json()
+            print(data)
+            actor = Actor(first_name=data['firstName'], last_name=data['lastName'], gender=data['gender'], date_of_birth=data['dateOfBirth'], age = data['age'])
+            actor.create()
+            return make_response(jsonify({"result": "Actor created successfuly."}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/actors', methods=["GET"])
-    def get_all_actors():
-        actors = Actor.query.all()
-        if actors is None:
-            abort(404)
-        return make_response(jsonify({
-        "actors": [actor.format() for actor in actors]
-        }), 200)
+    @requires_auth
+    def get_all_actors(payload):
+        if requires_scope("read:actors"):
+            actors = Actor.query.all()
+            if actors is None:
+                abort(404)
+            return make_response(jsonify({
+            "actors": [actor.format() for actor in actors]
+            }), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/actors/<int:id>', methods=["GET"])
-    def get_actor(id):
-        actor=Actor.query.get(id)
-        if actor is None:
-            abort(404)
-        return make_response(jsonify(actor.format()),200)
+    @requires_auth
+    def get_actor(payload, id):
+        if requires_scope("read:actors"):
+            actor=Actor.query.get(id)
+            if actor is None:
+                abort(404)
+            return make_response(jsonify(actor.format()),200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/actors/<int:id>', methods=["PATCH"])
-    def update_actor(id):
-        data = request.get_json()
-        actor=Actor.query.get(id)
-        if actor is None:
-            abort(404)
-        
-        if 'firstName' in data:
-            actor.first_name = data['firstName']
-        
-        if 'lastName' in data:
-            actor.last_name = data['lastName']
+    @requires_auth
+    def update_actor(payload, id):
+        if requires_scope("edit:actor"):
+            data = request.get_json()
+            actor=Actor.query.get(id)
+            if actor is None:
+                abort(404)
+            
+            if 'firstName' in data:
+                actor.first_name = data['firstName']
+            
+            if 'lastName' in data:
+                actor.last_name = data['lastName']
 
-        if 'gender' in data:
-            actor.gender = data['gender']
+            if 'gender' in data:
+                actor.gender = data['gender']
 
-        if 'age' in data:
-            actor.age = data['age']
+            if 'age' in data:
+                actor.age = data['age']
 
-        if 'dateOfBirth' in data:
-            actor.date_of_birth = data['dateOfBirth']
-        actor.update()
-        actor = Actor.query.get(id)
-        return make_response(jsonify({"result": "Actor updated successfuly.", "actor": actor.format()}), 200)
+            if 'dateOfBirth' in data:
+                actor.date_of_birth = data['dateOfBirth']
+            actor.update()
+            actor = Actor.query.get(id)
+            return make_response(jsonify({"result": "Actor updated successfuly.", "actor": actor.format()}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
 
     @app.route('/api/v1/actors/<int:id>', methods=["DELETE"])
-    def delete_actor(id):
-        actor=Actor.query.get(id)
-        if actor is None:
-            abort(404)
-        actor.delete()
-        return make_response(jsonify({"result": "Actor deleted successfuly."}), 200)
+    @requires_auth
+    def delete_actor(payload, id):
+        if requires_scope("delete:actor"):
+            actor=Actor.query.get(id)
+            if actor is None:
+                abort(404)
+            actor.delete()
+            return make_response(jsonify({"result": "Actor deleted successfuly."}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
 
     '''
     Movies Controllers
     '''
     @app.route('/api/v1/movies', methods=['POST'])
-    def create_movie():
-        data = request.get_json()
-        print(data)
-        movie = Movie(title=data['title'], genre=data['genre'], rating=data['rating'], release_date=data['releaseDate'])
-        movie.create()
-        return make_response(jsonify({"result": "Movie created successfuly."}), 200)
+    @requires_auth
+    def create_movie(payload):
+        if requires_scope("add:movie"):
+            data = request.get_json()
+            print(data)
+            movie = Movie(title=data['title'], genre=data['genre'], rating=data['rating'], release_date=data['releaseDate'])
+            movie.create()
+            return make_response(jsonify({"result": "Movie created successfuly."}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/movies', methods=["GET"])
-    def get_all_movies():
-        movies = Movie.query.all()
-        if movies is None:
-            abort(404)
-        return make_response(jsonify({
-        "actors": [movie.format() for movie in movies]
-        }), 200)
+    @requires_auth
+    def get_all_movies(payload):
+        if requires_scope("read:movies"):
+            movies = Movie.query.all()
+            if movies is None:
+                abort(404)
+            return make_response(jsonify({
+            "movies": [movie.format() for movie in movies]
+            }), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/movies/<int:id>', methods=["GET"])
-    def get_movie(id):
-        movie=Movie.query.get(id)
-        print(movie.cast)
-        for actor in movie.cast:
-            print(actor.first_name)
-        if movie is None:
-            abort(404)
-        return make_response(jsonify(movie.format()),200)
+    @requires_auth
+    def get_movie(payload, id):
+        if requires_scope("read:movies"):
+            movie=Movie.query.get(id)
+            print(movie.cast)
+            for actor in movie.cast:
+                print(actor.first_name)
+            if movie is None:
+                abort(404)
+            return make_response(jsonify(movie.format()),200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
     
     @app.route('/api/v1/movies/<int:id>', methods=["PATCH"])
-    def update_movie(id):
-        data = request.get_json()
-        movie=Movie.query.get(id)
-        if movie is None:
-            abort(404)
-        
-        if 'title' in data:
-            movie.title = data['title']
-        
-        if 'genre' in data:
-            movie.genre = data['genre']
+    @requires_auth
+    def update_movie(payload, id):
+        if requires_scope("edit:movie"):
+            data = request.get_json()
+            movie=Movie.query.get(id)
+            if movie is None:
+                abort(404)
+            
+            if 'title' in data:
+                movie.title = data['title']
+            
+            if 'genre' in data:
+                movie.genre = data['genre']
 
-        if 'rating' in data:
-            movie.rating = data['rating']
+            if 'rating' in data:
+                movie.rating = data['rating']
 
-        if 'releaseDate' in data:
-            movie.release_date = data['releaseDate']
-        movie.update()
-        movie = Movie.query.get(id)
-        return make_response(jsonify({"result": "Movie updated successfuly.", "movie": movie.format()}), 200)
+            if 'releaseDate' in data:
+                movie.release_date = data['releaseDate']
+            movie.update()
+            movie = Movie.query.get(id)
+            return make_response(jsonify({"result": "Movie updated successfuly.", "movie": movie.format()}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
 
     @app.route('/api/v1/movies/<int:id>', methods=["DELETE"])
-    def delete_movie(id):
-        movie=Movie.query.get(id)
-        if movie is None:
-            abort(404)
-        movie.delete()
-        return make_response(jsonify({"result": "Movie deleted successfuly."}), 200)
+    @requires_auth
+    def delete_movie(payload, id):
+        if requires_scope("delete:movie"):
+            movie=Movie.query.get(id)
+            if movie is None:
+                abort(404)
+            movie.delete()
+            return make_response(jsonify({"result": "Movie deleted successfuly."}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
 
     @app.route('/api/v1/movies/<int:movieid>/actor/<int:actorid>', methods=['POST'])
-    def create_movie_cast(movieid,actorid):
-        movie=Movie.query.get(movieid)
-        actor=Actor.query.get(actorid)
-        movie.cast.append(actor)
-        movie.update()
-        return make_response(jsonify({"result": "Movie cast created successfuly."}), 200)
+    @requires_auth
+    def create_movie_cast(payload, movieid,actorid):
+        if requires_scope("edit:movie"):
+            movie=Movie.query.get(movieid)
+            actor=Actor.query.get(actorid)
+            movie.cast.append(actor)
+            movie.update()
+            return make_response(jsonify({"result": "Movie cast created successfuly."}), 200)
+        raise AuthError({
+            "code": "Unauthorized",
+            "description": "You don't have access to this resource"
+        }, 403)
+
+    @app.errorhandler(AuthError)
+    def handle_auth_error(ex):
+        print("!!! Error Handler")
+        response = jsonify(ex.error)
+        response.status_code = ex.status_code
+        return response
 
     return app
 
 class AuthError(Exception):
-        def __init__(self, error, status_code):
-            self.error = error
-            self.status_code = status_code
+    def __init__(self, error, status_code):
+        self.error = error
+        self.status_code = status_code
 
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
@@ -269,6 +342,24 @@ def requires_auth(f):
             abort(401)
         return f(payload, *args, **kwargs)
     return wrapper
+
+def requires_scope(required_scope):
+    """Determines if the required scope is present in the Access Token
+    Args:
+        required_scope (str): The scope required to access the resource
+    """
+    token = get_token_auth_header()
+    unverified_claims = jwt.get_unverified_claims(token)
+    print('!!! unverified_claims={}', unverified_claims)
+    if unverified_claims.get("permissions"):
+            token_scopes = unverified_claims.get("permissions")
+            print('!!! token_scopes=' ,  token_scopes)
+            for token_scope in token_scopes:
+                if token_scope == required_scope:
+                    return True
+    return False
+
+
 
 app = create_app()
 
