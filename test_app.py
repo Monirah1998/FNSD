@@ -11,8 +11,7 @@ from models import setup_db, Actor, Movie
 import http.client
 
 
-class TriviaTestCase(unittest.TestCase):
-    """This class represents the trivia test case"""
+class CasingAgency(unittest.TestCase):
     CASTING_ASSISTANT_TOKEN = ""
     CASTING_DIRECTOR_TOKEN = ""
     EXECUTIVE_DIRECTOR_TOKEN = ""
