@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "4fade2a3-2f83-4161-97f3-91273ba9b4a7",
+		"name": "FSND",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actors",
+			"item": [
+				{
+					"name": "Create Actor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Jane1\",\n    \"lastName\": \"Doe\",\n    \"gender\": \"Female\",\n    \"dateOfBirth\": \"2018-01-01\",\n    \"age\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/actors",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Actor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"John1\",\n    \"lastName\": \"Doe\",\n    \"gender\": \"Female\",\n    \"dateOfBirth\": \"2020-01-01\",\n    \"age\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/actors/1",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Actor by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/actors/1",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Actor by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/actors/4",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"actors",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all actors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/actors",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Create Movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Harry Potter\",\n    \"genre\": \"Fantasy\",\n    \"rating\": \"5\",\n    \"releaseDate\": \"2020-01-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH Movie",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"genre\": \"Fantasy\",\n    \"rating\": \"5\",\n    \"releaseYear\": 2020,\n    \"title\": \"Harry Potter 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies/1",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Movie by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies/1",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies/1",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create cast",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://fsnd-heroku-app.herokuapp.com/api/v1/movies/1/actor/2",
+							"protocol": "https",
+							"host": [
+								"fsnd-heroku-app",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movies",
+								"1",
+								"actor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Casting Assistant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "cdqFbHMUDc8oNQwb3WPGGLCJF1tfGMv5",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "casting_assistant@castingagency.com",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "casting-agency",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "yXiR1sXn1ThO",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "RiuGdWH6P5e_LF4uPZjqswqBCEE4DbDGEfrCANDlhD6KOj78C4Z4OpUpnJlzBLag",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-i2ernxx1.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-i2ernxx1",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Casting Director",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "cdqFbHMUDc8oNQwb3WPGGLCJF1tfGMv5",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "casting_director@castingagency.com",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "casting-agency",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "yXiR1sXn1ThO",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "RiuGdWH6P5e_LF4uPZjqswqBCEE4DbDGEfrCANDlhD6KOj78C4Z4OpUpnJlzBLag",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-i2ernxx1.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-i2ernxx1",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Executive Producer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "cdqFbHMUDc8oNQwb3WPGGLCJF1tfGMv5",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "executive_producer@castingagency.com",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "casting-agency",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "yXiR1sXn1ThO",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "RiuGdWH6P5e_LF4uPZjqswqBCEE4DbDGEfrCANDlhD6KOj78C4Z4OpUpnJlzBLag",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev-i2ernxx1.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"dev-i2ernxx1",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
